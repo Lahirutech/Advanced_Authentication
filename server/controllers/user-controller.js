@@ -49,10 +49,10 @@ const login = async (req, res, next) => {
       return res.status(400).json({ message: "Inavlid Email / Password" });
     }
     const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "35s",
+      expiresIn: "1h",
     });
   
-    console.log("Generated Token\n", token);
+    console.log("Generated Token\n", token); 
   
     if (req.cookies[`${existingUser._id}`]) {
       req.cookies[`${existingUser._id}`] = "";
@@ -74,7 +74,7 @@ const verifyToken = (req, res, next) => {
     const cookies = req.headers.cookie
     const token = cookies.split("=")[1]
 
-    if (!token) { 
+    if (!token) {  
         res.status(400).json({message:"No token found"})
     }
 
@@ -82,16 +82,19 @@ const verifyToken = (req, res, next) => {
         if (err) { 
             return res.status(400).json({message:"Invalid Token"})
         }
-        console.log(user.id)
+        console.log("user id",user.id)
         req.id=user.id
     })
     next()
 }
 
 const getUser = async (req, res, next) => { 
+    console.log("triggered get user")
     const userId = req.id;
     let user
     try {
+        console.log("trying")
+
         user = await User.findById(userId, "-password")
         
     } catch (err) {        
@@ -100,6 +103,8 @@ const getUser = async (req, res, next) => {
     if (!user) { 
         return res.status(404).json({message:"Not Found"})
     }
+     return res.status(200).json({ user });
+
 }
 
 const refreshToken = (req, res, next) => { 
