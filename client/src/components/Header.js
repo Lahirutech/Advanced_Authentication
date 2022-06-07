@@ -11,11 +11,9 @@ export default function Header() {
                   <Box sx={{ marginLeft: "auto" }}>
                       <Tabs
                           indicatorColor="secondary"
-                          onChange={(e, val) => setValue(val)}
-                          value={value}
                           textColor="inherit">                          
-                        <Tab to="/login" LinkComponent={Link} label="Login" />
-                        <Tab to="/signup" LinkComponent={Link} label="Signup" />
+                        <Tab to="/login"  label="Login" />
+                        <Tab to="/signup" label="Signup" />
                     </Tabs>
                   </Box>
               </Toolbar>
