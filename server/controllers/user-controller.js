@@ -80,7 +80,7 @@ const verifyToken = (req, res, next) => {
 
     jwt.verify(String(token), process.env.JWT_SECRET_KEY, (err, user) => { 
         if (err) { 
-            return res.status(400).json({message:"Invalid Token"})
+            return res.status(400).json({message:"Invalid Token"}) 
         }
         console.log("user id",user.id)
         req.id=user.id
@@ -92,7 +92,7 @@ const getUser = async (req, res, next) => {
     console.log("triggered get user")
     const userId = req.id;
     let user
-    try {
+    try {  
         console.log("trying")
 
         user = await User.findById(userId, "-password")

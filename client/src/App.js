@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react'
 import axios from 'axios'
 import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
 
 function App() {
 
@@ -14,12 +15,15 @@ function App() {
   useEffect(() => {
     getData()
   }, [])
-  
-
   return (
-    <div className="App">
-      <p>Our message is {message}</p>
-    </div>
+    <React.Fragment>
+    <header>
+      <Header />
+    </header>
+    <main>
+   
+    </main>
+  </React.Fragment>
   );
 }
 
