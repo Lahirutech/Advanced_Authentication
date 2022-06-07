@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppBar, Box, Tab, Tabs, Toolbar, Typography } from "@mui/material";
+import { Link } from 'react-router-dom';
 
 
 export default function Header() {
@@ -12,12 +13,12 @@ export default function Header() {
                       <Tabs
                           indicatorColor="secondary"
                           textColor="inherit">                          
-                        <Tab to="/login"  label="Login" />
-                        <Tab to="/signup" label="Signup" />
+                        <Tab to="/login" LinkComponent={Link} label="Login" />
+                  <Tab to="/signup" LinkComponent={Link} label="Signup" />
                     </Tabs>
                   </Box>
               </Toolbar>
           </AppBar>
     </div>
-  )
+  ) 
 }
