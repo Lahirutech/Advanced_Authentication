@@ -10,8 +10,8 @@ import Signup from './components/Signup';
 import Welcome from './components/Welcome';
 
 function App() {
-
   const [message, setmessage] = useState("")
+
   const getData = async () => { 
     const res = await axios.get('/profile')
     setmessage(res.data.message)
@@ -22,13 +22,13 @@ function App() {
   return (
     <React.Fragment>
     <header>
-      {/* <Header /> */}
+      <Header />
     </header>
     <main>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/signup" element={<Welcome />} />
+          <Route path="/user" element={<Welcome />} />
 
         </Routes>
     </main>
