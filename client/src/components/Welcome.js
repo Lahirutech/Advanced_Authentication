@@ -10,7 +10,6 @@ export default function Welcome() {
         withCredentials: true,
       })
       .catch((err) => console.log(err));
-
     const data = await res.data;
     return data;
   };
