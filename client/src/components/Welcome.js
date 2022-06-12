@@ -1,28 +1,29 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-
-export default function Welcome() {
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+axios.defaults.withCredentials = true;
+let firstRender = true;
+const Welcome = () => {
   const [user, setUser] = useState();
-  const firstRender = true
+
   const refreshToken = async () => {
     const res = await axios
       .get("user/refresh", {
         withCredentials: true,
       })
       .catch((err) => console.log(err));
+
     const data = await res.data;
     return data;
   };
-  const sednRequest = async () => { 
+  const sednRequest = async () => {
     const res = await axios
-    .get("user/user", {
-      withCredentials: true,
-    })
-    .catch((err) => console.log(err));
-  const data = await res.data;
-  return data;
-  }
-
+      .get("user/user", {
+        withCredentials: true,
+      })
+      .catch((err) => console.log(err));
+    const data = await res.data;
+    return data;
+  };
   useEffect(() => {
     if (firstRender) {
       firstRender = false;
@@ -35,5 +36,6 @@ export default function Welcome() {
   }, []);
 
   return <div>{user && <h1>{user.name}</h1>}</div>;
-  
-}
+};
+
+export default Welcome;

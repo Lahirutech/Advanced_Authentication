@@ -8,17 +8,11 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Welcome from './components/Welcome';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [message, setmessage] = useState("")
-
-  const getData = async () => { 
-    const res = await axios.get('/profile')
-    setmessage(res.data.message)
-  }
-  useEffect(() => {
-    getData()
-  }, [])
+  const isLoggedIn = useSelector(state => state.isLoggedIn)
+  console.log("isLoggedIn",isLoggedIn)
   return (
     <React.Fragment>
     <header>
@@ -28,8 +22,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/user" element={<Welcome />} />
-
+          {isLoggedIn && <Route path="/user" element={<Welcome />} />}{ ""}
         </Routes>
     </main>
   </React.Fragment>
