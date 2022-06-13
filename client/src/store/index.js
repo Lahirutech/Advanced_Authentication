@@ -1,4 +1,13 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
+
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+
 const authSlice = createSlice({
     name: "auth",
     initialState: { isLoggedIn: false },
@@ -11,9 +20,15 @@ const authSlice = createSlice({
         }
     }
 })
+const persistedReducer = persistReducer(persistConfig, authSlice.reducer)
+
 
 export const authActions = authSlice.actions;
 
 export const store = configureStore({
-    reducer:authSlice.reducer
+    reducer: persistedReducer,
+    middleware: [thunk]
+
 })
+
+export const persistor = persistStore(store)
