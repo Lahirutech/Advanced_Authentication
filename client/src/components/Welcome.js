@@ -8,7 +8,7 @@ const Welcome = () => {
   const refreshToken = async () => {
     const res = await axios
       .get("user/refresh", {
-        withCredentials: true,
+        withCredentials: true, 
       })
       .catch((err) => console.log(err));
 
@@ -25,10 +25,8 @@ const Welcome = () => {
     return data;
   };
   useEffect(() => {
-    if (firstRender) {
-      firstRender = false;
       sednRequest().then((data) => setUser(data.user));
-    }
+    
     let interval = setInterval(() => {
       refreshToken().then((data) => setUser(data.user));
     }, 1000 * 29);

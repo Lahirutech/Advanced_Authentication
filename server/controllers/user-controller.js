@@ -8,9 +8,9 @@ const signup = async (req, res, next) => {
     try {
         existingUser = await User.findOne({ email: email })
         
-    } catch(err) { 
-        console.log(err)
-    }
+    } catch(err) {  
+        console.log(err) 
+    } 
     if (existingUser) { 
         return res
             .status(400)
@@ -71,7 +71,9 @@ const login = async (req, res, next) => {
 };
   
 const verifyToken = (req, res, next) => { 
-    const cookies = req.headers.cookie
+  const cookies = req.headers.cookie
+    
+  console.log("cookies", cookies)
     const token = cookies.split("=")[1]
 
     if (!token) {  
